@@ -1,0 +1,32 @@
+package api_testing;
+
+import io.restassured.RestAssured;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+import files.Payload;
+
+public class Basics {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		//given--all input
+		//when--submit the api (resource, http method)
+		//then--validate the response
+		RestAssured.baseURI="https://rahulshettyacademy.com";
+		String response = given().log().all().queryParam("key", "qaclick123").headers("content-type","application/json").body(Payload.Addplace()).when().post("maps/api/place/add/json").then().log().all().assertThat().statusCode(200).body("scope", equalTo("APP")).header("server", "Apache/2.4.52 (Ubuntu)").extract().response().asString();
+	
+		//Add place-> Update Place with New Address -> Get Place to validate if New address is present in response
+		
+		System.out.println(response);
+	
+	
+	
+	
+	
+	
+	
+	}
+
+}
